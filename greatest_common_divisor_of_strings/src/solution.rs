@@ -6,12 +6,10 @@ fn gcd(a: usize, b: usize) -> usize {
 }
 
 pub fn gcd_of_strings(str1: String, str2: String) -> String {
-    let gcd_length = gcd(str1.len(), str2.len());
-
-    let divisor = &str1[0..gcd_length];
-
     if format!("{str1}{str2}") == format!("{str2}{str1}") {
-        divisor.to_owned()
+        let gcd_length = gcd(str1.len(), str2.len());
+
+        str1[0..gcd_length].to_owned()
     } else {
         "".to_owned()
     }
