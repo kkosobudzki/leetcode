@@ -1,23 +1,18 @@
 pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
-    let k64 = f64::from(k);
     let ku = k as usize;
 
-    let mut sum = nums[0..ku]
-        .iter()
-        .fold(0.0, |acc, &num| acc + f64::from(num));
-    let mut max = sum / k64;
+    let mut sum = nums[0..ku].iter().fold(0.0, |acc, &num| acc + num as f64);
+    let mut max_sum = sum;
 
     for i in 1..nums.len() - ku + 1 {
-        sum = sum - f64::from(nums[i - 1]) + f64::from(nums[i + ku - 1]);
+        sum = sum - nums[i - 1] as f64 + nums[i + ku - 1] as f64;
 
-        let average = sum / k64;
-
-        if average > max {
-            max = average;
+        if sum > max_sum {
+            max_sum = sum
         }
     }
 
-    max
+    max_sum / k as f64
 }
 
 #[cfg(test)]
