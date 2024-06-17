@@ -1,4 +1,4 @@
-fn single_number(nums: Vec<i32>) -> i32 {
+pub fn single_number(nums: Vec<i32>) -> i32 {
     // a ^ b = 1
     // a ^ a = 0
     // a ^ b ^ a = 1
