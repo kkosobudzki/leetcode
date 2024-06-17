@@ -21,7 +21,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     loop {
         match current {
             Some(boxed) => {
-                queue.push_front(boxed.val);
+                queue.push_back(boxed.val);
 
                 current = boxed.next;
             }
