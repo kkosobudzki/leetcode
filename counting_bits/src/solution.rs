@@ -13,7 +13,7 @@ pub fn count_bits(n: i32) -> Vec<i32> {
     ans[1] = 1;
 
     for i in 2..nu + 1 {
-        ans[i] = ans[i / 2] + i as i32 % 2; // even = 0 at the end, odd = 1 at the end
+        ans[i] = ans[i / 2] + i as i32 % 2; // even = 0 at the end, odd = 1 at the end, i / 2 because of the representation => 2^nth
     }
 
     ans
