@@ -5,23 +5,28 @@ pub fn predict_party_victory(senate: String) -> String {
     let mut to_remove: VecDeque<char> = VecDeque::new();
 
     while senators.len() > 1 {
-        let senator = senators.pop_front().unwrap(); // it cannot be empty
-
-        match to_remove.pop_front() {
-            Some(s) if s == senator => {} // removing
-            Some(s) if s != senator => {
-                if senators.iter().all(|&in_game| in_game == senator) {
+        match (to_remove.front(), senators.pop_front()) {
+            (Some(&ban), Some(senator)) if ban == senator => {
+                // banning first matched senator
+                to_remove.pop_front();
+            }
+            (_, Some(senator)) => {
+                // this sucks
+                if senators.iter().all(|&s| s == senator) {
+                    // all senators from the same party - win
                     return senators_party(senator);
+                } else {
+                    // removing opposite of senator
+                    to_remove.push_back(opposite_of(senator));
+                    // senator's going to the next round
+                    senators.push_back(senator);
                 }
-
-                to_remove.push_front(s); // return to the queue
-
-                to_remove.push_back(s); // removing an opposite of s
-                senators.push_back(senator); // stays in the game
             }
             _ => {
-                to_remove.push_back(opposite_of(senator)); // removing an opposite of s
-                senators.push_back(senator); // stays in the game
+                panic!(
+                    "uncovered case, to_remove: {:?}, senators: {:?}",
+                    to_remove, senators
+                )
             }
         }
     }
