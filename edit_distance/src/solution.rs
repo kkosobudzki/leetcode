@@ -1,3 +1,4 @@
+// https://web.stanford.edu/class/cs124/lec/med.pdf
 pub fn min_distance(word1: String, word2: String) -> i32 {
     let m = word1.len();
     let n = word2.len();
