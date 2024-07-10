@@ -32,8 +32,6 @@ impl SmallestInfiniteSet {
     }
 
     fn add_back(&mut self, num: i32) {
-        // let size = self.numbers.len();
-
         if self.numbers.iter().find(|&&n| n == num).is_some() {
             return;
         }
